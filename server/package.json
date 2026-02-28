@@ -1,0 +1,23 @@
+{
+  "name": "bookmyshow-app",
+  "version": "1.0.0",
+  "description": "This is a book my show app clone.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavanganeshbutha/bookmyshow-app.git"
+  },
+  "author": "Pavan Ganesh Butha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavanganeshbutha/bookmyshow-app/issues"
+  },
+  "homepage": "https://github.com/pavanganeshbutha/bookmyshow-app#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
