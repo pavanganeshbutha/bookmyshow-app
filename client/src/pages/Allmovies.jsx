@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { fetchMovies } from "../lib/apis";
+import { fetchMovies } from "../lib/api";
 import useHttp from "../hooks/useHttp";
 import { Row, Col, Spin } from "antd";
 import MovieCard from "../components/MovieCard";
