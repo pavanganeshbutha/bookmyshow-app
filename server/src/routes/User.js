@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 const ApiResponse = require("../utils/ApiResponse");
-const { BadRequestError } = require("../utils/errors");
+const { BadRequestError, AuthenticationError } = require("../core/ApiError");
+const { isLoggedIn } = require("../middlewares/User");
 
 const router = express.Router();
 const JWT_SECRET =
@@ -46,7 +47,7 @@ router.post("/login", async (req, res) => {
   res.json(ApiResponse.build(true, { token }, "Login successful"));
 });
 
-router.get("/secret", async (req, res) => {
+router.get("/secret", isLoggedIn, (req, res) => {
   res.send("This is a secret route accessible only to authenticated users.");
 });
 
