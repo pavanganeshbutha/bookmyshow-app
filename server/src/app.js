@@ -1,11 +1,16 @@
-// Import Express.js framework
 const express = require("express");
-const healthCheckRoutes = require("./routes/health");
-const movieRoutes = require("./routes/movie");
 const cors = require("cors");
 
-// Create Express application instance
+// Routes
+const healthcheckRoutes = require("./routes/health");
+const moviesRoutes = require("./routes/movie");
+const userRoutes = require("./routes/User");
+const { ApiError } = require("./core/ApiError");
+
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
@@ -14,20 +19,22 @@ app.use(
   }),
 );
 
-app.use(healthCheckRoutes);
-app.use("/api/v1/movies", movieRoutes);
+app.use(healthcheckRoutes);
+app.use("/api/v1/movies", moviesRoutes);
+app.use("/api/v1/users", userRoutes);
 
-// Global error handling middleware
+// Global Exception handler
 app.use((err, req, res, next) => {
-  // Destructure error with default statusCode and message
-  const { statusCode = 500, message = "Something went wrong!" } = err;
-
-  // Send error response as JSON
-  res.status(statusCode).json({
-    success: false,
-    message: message,
-  });
+  if (err instanceof ApiError) {
+    const { status = 500, message = "Internal server error" } = err;
+    return res.status(status).json({
+      success: false,
+      message: message,
+    });
+  }
+  return res
+    .status(500)
+    .json({ success: false, message: "Something went wrong" });
 });
 
-// Export app instance
 module.exports = app;

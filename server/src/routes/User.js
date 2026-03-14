@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
-const ApiResponse = require("../utils/ApiResponse");
+const ApiResponse = require("../core/ApiResponse");
 const { BadRequestError, AuthenticationError } = require("../core/ApiError");
 const { isLoggedIn } = require("../middlewares/User");
 
